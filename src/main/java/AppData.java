@@ -13,10 +13,10 @@ public class AppData {
         this.products.add(new Product("Coca-cola",2.5));
         //add remaining products
 
-        this.movies.add();
+        //this.movies.add();
         //needs class Movie implemented
 
-        this.sessions.add();
+        //this.sessions.add();
         //needs class Session implemented
     }
 
