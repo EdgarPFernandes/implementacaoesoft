@@ -5,6 +5,10 @@ public class Bar extends JFrame {
 
     private JPanel mainPanel;
     private JPanel Header;
+    private JPanel leftButtons;
+    private JPanel cart;
+    private JPanel middlePanel;
+    private JButton addProduct;
 
     public Bar(String title) throws HeadlessException {
         super(title);
@@ -18,4 +22,5 @@ public class Bar extends JFrame {
     public static void main(String[] args) {
         new Bar("Bar").setVisible(true);
     }
+
 }
