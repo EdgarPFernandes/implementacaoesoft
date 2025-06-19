@@ -5,7 +5,7 @@ import java.util.List;
 public class AppData {
     private static AppData instance = null;
 
-    private List<Product> products = new ArrayList<>();
+    private List<BarProduct> barProducts = new ArrayList<>();
     private final String FILE_NAME = "products.dat";
 
     private List<Movie> movies = new ArrayList<>();
@@ -13,28 +13,33 @@ public class AppData {
 
 
 
-    public AppData() {
-        this.products.add(new Product("Coca-cola",2.5));
-        this.products.add(new Product("Pepsi", 2.3));
-        this.products.add(new Product("Fanta", 2.4));
-        this.products.add(new Product("Sprite", 2.2));
 
-        this.products.add(new Product("Coca-cola",2.5));
-        this.products.add(new Product("Pepsi", 2.3));
-        this.products.add(new Product("Fanta", 2.4));
-        this.products.add(new Product("Sprite", 2.2));
-        this.products.add(new Product("Coca-cola",2.5));
-        this.products.add(new Product("Pepsi", 2.3));
-        this.products.add(new Product("Fanta", 2.4));
-        this.products.add(new Product("Sprite", 2.2));
-        this.products.add(new Product("Coca-cola",2.5));
-        this.products.add(new Product("Pepsi", 2.3));
-        this.products.add(new Product("Fanta", 2.4));
-        this.products.add(new Product("Sprite", 2.2));
-        this.products.add(new Product("Coca-cola",2.5));
-        this.products.add(new Product("Pepsi", 2.3));
-        this.products.add(new Product("Fanta", 2.4));
-        this.products.add(new Product("Sprite", 2.2));
+    public AppData() {
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
 
         //add remaining products
 
@@ -56,7 +61,7 @@ public class AppData {
 
     public void saveData() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            out.writeObject(products);
+            out.writeObject(barProducts);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,15 +75,15 @@ public class AppData {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
             Object obj = in.readObject();
             if (obj instanceof List<?>) {
-                products = (List<Product>) obj;
+                barProducts = (List<BarProduct>) obj;
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<BarProduct> getBarProducts() {
+        return barProducts;
     }
 
     public List<Movie> getMovies() {

@@ -1,34 +1,24 @@
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
+    private Map<Product, Integer> items = new HashMap<>();
 
-    private Double total;
-    private LinkedList<Product> productList;
-
-    public Cart() {
-        this.total = 0.0;
-        this.productList = new LinkedList<>();
+    public void addProduct(Product product) {
+        items.put(product, items.getOrDefault(product, 0) + 1);
     }
 
-
-    public void emptyCart(){
-        this.productList.clear();
-        this.total = 0.0;
+    public void clear() {
+        items.clear();
     }
 
-    public void updateTotal(Double produtValue) {
-        this.total += produtValue;
+    public double getTotal() {
+        return items.entrySet().stream()
+                .mapToDouble(e -> e.getKey().getPrice() * e.getValue())
+                .sum();
     }
 
-    public void addListaProdutos(Product product) {
-        this.productList.add(product);
-    }
-
-    public LinkedList<Product> getProductList() {
-        return productList;
-    }
-
-    public Double getTotal() {
-        return total;
+    public Map<Product, Integer> getItems() {
+        return items;
     }
 }

@@ -1,14 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class Bar extends JFrame {
     private JPanel mainPanel;
     private JPanel Header;
     private JPanel leftButtons;
-    private JPanel cart;
+    private JPanel cartPanel;
     private JPanel middlePanel;
-    private JButton addProduct;
 
     private JButton button11;
     private JButton button12;
@@ -29,10 +29,20 @@ public class Bar extends JFrame {
 
     private JButton previousPageButton; // Previous page
     private JButton nextPageButton; // Next page
+    private JButton viewStockButton;
+    private JButton bilheteiraButton;
+    private JLabel carrinhoLbl;
+    private JPanel cartInfo;
+    private JList list1;
+    private JLabel totalLbl;
+    private JTextField totalValue;
+    private JButton cancelButton;
+    private JButton confirmButton;
 
     private JButton[][] productButtons = new JButton[4][4];
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 16;
+    private Cart cart = new Cart();
 
     public Bar(String title) throws HeadlessException {
         super(title);
@@ -63,21 +73,27 @@ public class Bar extends JFrame {
             }
         });
 
-        // Add Product Button
-        addProduct.addActionListener(e -> {
-            String name = JOptionPane.showInputDialog(this, "Enter product name:");
-            if (name != null && !name.trim().isEmpty()) {
-                String priceInput = JOptionPane.showInputDialog(this, "Enter product price:");
-                try {
-                    double price = Double.parseDouble(priceInput);
-                    AppData.getInstance().getProducts().add(new Product(name.trim(), price));
-                    AppData.getInstance().saveData(); // <-- Save right after adding
-                    updateButtonLabels();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid price.");
-                }
+        cancelButton.addActionListener(e -> clearCart());
+        confirmButton.addActionListener(e -> {
+            if (cart.getItems().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "O carrinho está vazio.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Compra efetuada!");
+                clearCart();
             }
         });
+
+        viewStockButton.addActionListener(e -> {
+            new Stock("Stock").setVisible(true);
+            dispose(); // closes Bar window
+        });
+
+        bilheteiraButton.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose(); // closes Bar window
+        });
+
+
     }
 
     private void setupProductButtons() {
@@ -93,23 +109,27 @@ public class Bar extends JFrame {
             int col = i % 4;
             productButtons[row][col] = flatButtons[i];
 
-            final int index = i; // 👈 this is the fix
+            final int index = i;
 
             flatButtons[i].addActionListener(e -> {
-                String text = flatButtons[index].getText(); // now valid
-                if (!text.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Clicked: " + text);
+                int productIndex = currentPage * ITEMS_PER_PAGE + index;
+                List<BarProduct> products = getProducts();
+
+                if (productIndex < products.size()) {
+                    Product selected = products.get(productIndex);
+                    cart.addProduct(selected);
+                    updateCartDisplay();
                 }
             });
         }
     }
 
-    private List<Product> getProducts() {
-        return AppData.getInstance().getProducts();
+    private List<BarProduct> getProducts() {
+        return AppData.getInstance().getBarProducts();
     }
 
     private void updateButtonLabels() {
-        List<Product> products = getProducts();
+        List<BarProduct> products = getProducts();
         int start = currentPage * ITEMS_PER_PAGE;
 
         for (int i = 0; i < 16; i++) {
@@ -120,7 +140,7 @@ public class Bar extends JFrame {
 
             if (index < products.size()) {
                 Product p = products.get(index);
-                button.setText("<html><center>" + p.getProductName() + "<br>$" + String.format("%.2f", p.getPrice()) + "</center></html>");
+                button.setText("<html><center>" + p.getProductName() + "<br>€" + String.format("%.2f", p.getPrice()) + "</center></html>");
                 button.setEnabled(true);
             } else {
                 button.setText("");
@@ -128,6 +148,46 @@ public class Bar extends JFrame {
             }
         }
     }
+
+    private void addToCartList(Product p) {
+        DefaultListModel<String> model;
+
+        if (list1.getModel() instanceof DefaultListModel) {
+            model = (DefaultListModel<String>) list1.getModel();
+        } else {
+            model = new DefaultListModel<>();
+            list1.setModel(model);
+        }
+
+        model.addElement(p.getProductName() + " - €" + String.format("%.2f", p.getPrice()));
+    }
+
+    private void updateTotalField() {
+        totalValue.setText(String.format("€%.2f", cart.getTotal()));
+    }
+
+    private void clearCart() {
+        cart.clear();
+        list1.setModel(new DefaultListModel<>());
+        totalValue.setText("€0.00");
+    }
+
+    private void updateCartDisplay() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        double total = 0.0;
+
+        for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
+            Product p = entry.getKey();
+            int quantity = entry.getValue();
+            double subtotal = p.getPrice() * quantity;
+            model.addElement(quantity + "x " + p.getProductName() + " - $" + String.format("%.2f", subtotal));
+            total += subtotal;
+        }
+
+        list1.setModel(model);
+        totalValue.setText("€" + String.format("%.2f", total));
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Bar("Bar").setVisible(true));
