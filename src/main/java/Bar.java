@@ -125,8 +125,12 @@ public class Bar extends JFrame {
     }
 
     private List<BarProduct> getProducts() {
+        return AppData.getInstance().getBarProducts().stream()
+                .filter(p -> p.getStock() > 0)
+                .toList();
         return AppData.getInstance().getBarProducts();
     }
+
 
     private void updateButtonLabels() {
         List<BarProduct> products = getProducts();

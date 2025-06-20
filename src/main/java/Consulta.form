@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Consulta">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1600" height="700"/>
+    </constraints>
+    <properties>
+      <minimumSize width="1600" height="700"/>
+      <preferredSize width="1600" height="700"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="edfd2" binding="navbarPanel" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="1" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="1600" height="80"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16178019"/>
+          <opaque value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="365ed" class="javax.swing.JButton" binding="btnFilmes">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <enabled value="true"/>
+              <foreground color="-2104859"/>
+              <opaque value="false"/>
+              <text value="FILMES"/>
+            </properties>
+          </component>
+          <component id="8a8ce" class="javax.swing.JButton" binding="btnSessoes">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <autoscrolls value="false"/>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <text value="SESSÕES"/>
+            </properties>
+          </component>
+          <component id="40d97" class="javax.swing.JButton" binding="btnBar">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <text value="BAR"/>
+            </properties>
+          </component>
+          <component id="104b5" class="javax.swing.JButton" binding="btnBilheteira">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <text value="BILHETEIRA"/>
+            </properties>
+          </component>
+          <component id="804be" class="javax.swing.JButton" binding="btnConsulta">
+            <constraints>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <text value="CONSULTA"/>
+            </properties>
+          </component>
+          <component id="73996" class="javax.swing.JButton" binding="btnSalas">
+            <constraints>
+              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2104859"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="false"/>
+              <defaultCapable value="false"/>
+              <enabled value="true"/>
+              <focusPainted value="true"/>
+              <foreground color="-2104859"/>
+              <hideActionText value="false"/>
+              <text value="SALAS"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="8ce03" binding="rightButtons" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="4" fill="2" indent="0" use-parent-layout="false">
+            <minimum-size width="300" height="600"/>
+            <preferred-size width="300" height="600"/>
+            <maximum-size width="300" height="600"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-2104859"/>
+          <enabled value="true"/>
+          <foreground color="-2104859"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="f959c" class="javax.swing.JLabel" binding="rentabilidadeSalaLbl">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="90"/>
+                <preferred-size width="250" height="90"/>
+                <maximum-size width="250" height="90"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <font size="20"/>
+              <foreground color="-2104859"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="true"/>
+              <text value="Carrinho"/>
+              <verifyInputWhenFocusTarget value="true"/>
+              <verticalTextPosition value="0"/>
+            </properties>
+          </component>
+          <component id="6dc95" class="javax.swing.JLabel" binding="lucroMedioFilmeLbl">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="90"/>
+                <preferred-size width="250" height="90"/>
+                <maximum-size width="250" height="90"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <focusTraversalPolicyProvider value="false"/>
+              <focusable value="true"/>
+              <font size="20"/>
+              <foreground color="-2104859"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="true"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <component id="a9ffd" class="javax.swing.JLabel" binding="generoMaisLbl">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="90"/>
+                <preferred-size width="250" height="90"/>
+                <maximum-size width="250" height="90"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <font size="20"/>
+              <foreground color="-2104859"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="true"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <component id="15d92" class="javax.swing.JLabel" binding="taxaMediaOcupacaoLbl">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="90"/>
+                <preferred-size width="250" height="90"/>
+                <maximum-size width="250" height="90"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <font size="20"/>
+              <foreground color="-2104859"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="true"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <component id="bb258" class="javax.swing.JLabel" binding="filmeMaisLbl">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="90"/>
+                <preferred-size width="250" height="90"/>
+                <maximum-size width="250" height="90"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <font size="20"/>
+              <foreground color="-2104859"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="true"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="1b8d7" binding="leftButtons" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false">
+            <minimum-size width="300" height="600"/>
+            <preferred-size width="300" height="600"/>
+            <maximum-size width="300" height="600"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-2104859"/>
+          <foreground color="-2104859"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="94ee8" class="javax.swing.JButton" binding="btnTop10">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="100"/>
+                <preferred-size width="250" height="100"/>
+                <maximum-size width="250" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <hideActionText value="false"/>
+              <horizontalTextPosition value="11"/>
+              <text value="Top 10 Filmes Mais Vendidos"/>
+              <visible value="true"/>
+            </properties>
+          </component>
+          <component id="b1254" class="javax.swing.JButton" binding="btnTipoBilhete">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="100"/>
+                <preferred-size width="250" height="100"/>
+                <maximum-size width="250" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <defaultCapable value="false"/>
+              <doubleBuffered value="false"/>
+              <focusPainted value="true"/>
+              <foreground color="-2104859"/>
+              <hideActionText value="false"/>
+              <text value="Tipo de Bilhetes"/>
+              <verifyInputWhenFocusTarget value="true"/>
+              <visible value="true"/>
+            </properties>
+          </component>
+          <component id="8c780" class="javax.swing.JButton" binding="btnTipoSala">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="100"/>
+                <preferred-size width="250" height="100"/>
+                <maximum-size width="250" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <borderPainted value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <text value="Tipo de Salas"/>
+            </properties>
+          </component>
+          <component id="39765" class="javax.swing.JButton" binding="btnDadosFilme">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="100"/>
+                <preferred-size width="250" height="100"/>
+                <maximum-size width="250" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <borderPainted value="false"/>
+              <defaultCapable value="false"/>
+              <foreground color="-2104859"/>
+              <opaque value="true"/>
+              <text value="Dados Filmes"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="fdf41" binding="middlePanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="900" height="600"/>
+            <preferred-size width="900" height="600"/>
+            <maximum-size width="900" height="600"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-2104859"/>
+          <foreground color="-2104859"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="7239e" class="javax.swing.JButton" binding="button1" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="125" height="50"/>
+                <preferred-size width="125" height="50"/>
+                <maximum-size width="125" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11119018"/>
+              <borderPainted value="false"/>
+              <contentAreaFilled value="true"/>
+              <foreground color="-2104859"/>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <hspacer id="64475">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="2acbf">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="100" height="-1"/>
+                <preferred-size width="100" height="-1"/>
+                <maximum-size width="100" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <vspacer id="22eed">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="500"/>
+                <preferred-size width="-1" height="500"/>
+                <maximum-size width="-1" height="500"/>
+              </grid>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
