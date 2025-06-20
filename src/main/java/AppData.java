@@ -15,31 +15,11 @@ public class AppData {
 
 
     public AppData() {
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
+        this.barProducts.add(new BarProduct("Coca-cola",2.5,10,3,1.0));
+        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15,3,0.6));
+        this.barProducts.add(new BarProduct("Fanta", 2.4,12,2,0.8));
+        this.barProducts.add(new BarProduct("Sprite", 2.2,15,1, 1.2));
 
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
-        this.barProducts.add(new BarProduct("Coca-cola",2.5,10));
-        this.barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-        this.barProducts.add(new BarProduct("Fanta", 2.4,12));
-        this.barProducts.add(new BarProduct("Sprite", 2.2,15));
 
         //add remaining products
 

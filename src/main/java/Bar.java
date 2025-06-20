@@ -78,8 +78,20 @@ public class Bar extends JFrame {
             if (cart.getItems().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "O carrinho está vazio.");
             } else {
+                for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    // Ensure it's a BarProduct before updating stock
+                    if (product instanceof BarProduct) {
+                        BarProduct bp = (BarProduct) product;
+                        double newStock = bp.getStock() - quantity;
+                        bp.setStock(Math.max(0, newStock));
+                    }
+                }
                 JOptionPane.showMessageDialog(this, "Compra efetuada!");
                 clearCart();
+                updateButtonLabels();
             }
         });
 
@@ -125,8 +137,11 @@ public class Bar extends JFrame {
     }
 
     private List<BarProduct> getProducts() {
-        return AppData.getInstance().getBarProducts();
+        return AppData.getInstance().getBarProducts().stream()
+                .filter(p -> p.getStock() > 0)
+                .toList();
     }
+
 
     private void updateButtonLabels() {
         List<BarProduct> products = getProducts();
@@ -147,23 +162,6 @@ public class Bar extends JFrame {
                 button.setEnabled(false);
             }
         }
-    }
-
-    private void addToCartList(Product p) {
-        DefaultListModel<String> model;
-
-        if (list1.getModel() instanceof DefaultListModel) {
-            model = (DefaultListModel<String>) list1.getModel();
-        } else {
-            model = new DefaultListModel<>();
-            list1.setModel(model);
-        }
-
-        model.addElement(p.getProductName() + " - €" + String.format("%.2f", p.getPrice()));
-    }
-
-    private void updateTotalField() {
-        totalValue.setText(String.format("€%.2f", cart.getTotal()));
     }
 
     private void clearCart() {
@@ -187,6 +185,8 @@ public class Bar extends JFrame {
         list1.setModel(model);
         totalValue.setText("€" + String.format("%.2f", total));
     }
+
+
 
 
     public static void main(String[] args) {
