@@ -1,11 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-//
-public class Filmes extends JFrame {
+
+public class Salas extends JFrame {
     private JPanel mainPanel;
-    private JPanel leftButtons;
     private JPanel middlePanel;
+    private JPanel navBar;
 
     private JButton button11;
     private JButton button12;
@@ -24,11 +24,10 @@ public class Filmes extends JFrame {
     private JButton button43;
     private JButton button44;
 
-    private JButton add_movie;
     private JButton nextPageButton;
     private JButton previousPageButton;
-    private JButton viewSessions; // botão para ver sessões
-    private JPanel navbarPanel;
+    private JButton addSalaButton;
+
     private JButton btnFilmes;
     private JButton btnSessoes;
     private JButton btnBar;
@@ -36,24 +35,20 @@ public class Filmes extends JFrame {
     private JButton btnConsulta;
     private JButton btnSalas;
 
-    private JButton[][] movieButtons = new JButton[4][4];
-    private int currentPage = 0;
+    private JButton[][] salaButtons = new JButton[4][4];
     private final int ITEMS_PER_PAGE = 16;
+    private int currentPage = 0;
 
-    public Filmes(String title) throws HeadlessException {
+    public Salas(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
         setLocationRelativeTo(null);
 
-        // Setup movie button grid
-        setupMovieButtons();
-
-        // Show first page of movies
+        setupButtons();
         updateButtonLabels();
 
-        // Botão: página anterior
         previousPageButton.addActionListener(e -> {
             if (currentPage > 0) {
                 currentPage--;
@@ -61,23 +56,16 @@ public class Filmes extends JFrame {
             }
         });
 
-        // Botão: próxima página
         nextPageButton.addActionListener(e -> {
-            int maxPages = (int) Math.ceil((double) getMovies().size() / ITEMS_PER_PAGE);
+            int maxPages = (int) Math.ceil((double) getSalas().size() / ITEMS_PER_PAGE);
             if (currentPage < maxPages - 1) {
                 currentPage++;
                 updateButtonLabels();
             }
         });
 
-        // Botão: Ver Sessões
-        viewSessions.addActionListener(e -> {
-            new Sessoes("Sessões").setVisible(true);
-            dispose(); // fecha janela atual
-        });
-
-        add_movie.addActionListener(e -> {
-            new AddMovie("Adicionar Filme").setVisible(true);
+        addSalaButton.addActionListener(e -> {
+            new AddSala("Adicionar Sala").setVisible(true);
         });
 
         btnBar.addActionListener(e -> {
@@ -111,55 +99,54 @@ public class Filmes extends JFrame {
         });
     }
 
-    private List<Movie> getMovies() {
-        return AppData.getInstance().getMovies();
-    }
-
-    private void setupMovieButtons() {
-        JButton[] flatButtons = {
+    private void setupButtons() {
+        JButton[] flat = {
                 button11, button12, button13, button14,
                 button21, button22, button23, button24,
                 button31, button32, button33, button34,
                 button41, button42, button43, button44
         };
 
-        for (int i = 0; i < flatButtons.length; i++) {
+        for (int i = 0; i < flat.length; i++) {
             int row = i / 4;
             int col = i % 4;
-            movieButtons[row][col] = flatButtons[i];
+            salaButtons[row][col] = flat[i];
 
             final int index = i;
-
-            flatButtons[i].addActionListener(e -> {
-                int movieIndex = currentPage * ITEMS_PER_PAGE + index;
-                List<Movie> movies = getMovies();
-
-                if (movieIndex < movies.size()) {
-                    Movie selected = movies.get(movieIndex);
-                    new DetailsMovie(selected).setVisible(true);
+            flat[i].addActionListener(e -> {
+                int salaIndex = currentPage * ITEMS_PER_PAGE + index;
+                List<Sala> salas = getSalas();
+                if (salaIndex < salas.size()) {
+                    Sala selected = salas.get(salaIndex);
+                    new DetailsSala(selected).setVisible(true);
+                    dispose();
                 }
             });
         }
     }
 
     private void updateButtonLabels() {
-        List<Movie> movies = getMovies();
+        List<Sala> salas = getSalas();
         int start = currentPage * ITEMS_PER_PAGE;
 
         for (int i = 0; i < 16; i++) {
             int index = start + i;
             int row = i / 4;
             int col = i % 4;
-            JButton button = movieButtons[row][col];
+            JButton btn = salaButtons[row][col];
 
-            if (index < movies.size()) {
-                Movie m = movies.get(index);
-                button.setText("<html><center>" + m.getTitle() + "<br>" + m.getGenre() + "</center></html>");
-                button.setEnabled(true);
+            if (index < salas.size()) {
+                Sala s = salas.get(index);
+                btn.setText(s.getNome());
+                btn.setEnabled(true);
             } else {
-                button.setText("");
-                button.setEnabled(false);
+                btn.setText("");
+                btn.setEnabled(false);
             }
         }
+    }
+
+    private List<Sala> getSalas() {
+        return AppData.getInstance().getSalas();
     }
 }

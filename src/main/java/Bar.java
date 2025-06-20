@@ -128,7 +128,6 @@ public class Bar extends JFrame {
         return AppData.getInstance().getBarProducts().stream()
                 .filter(p -> p.getStock() > 0)
                 .toList();
-        return AppData.getInstance().getBarProducts();
     }
 
 

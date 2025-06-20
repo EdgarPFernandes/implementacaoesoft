@@ -34,12 +34,12 @@ public class PaginaInicial extends JFrame{
         });
 
         btnFilmes.addActionListener(e -> {
-            //new Filmes("Filmes").setVisible(true);
+            new Filmes("Filmes").setVisible(true);
             dispose();
         });
 
         btnSessoes.addActionListener(e -> {
-            //new Sessoes("Sessoes").setVisible(true);
+            new Sessoes("Sessoes").setVisible(true);
             dispose();
         });
 
@@ -49,14 +49,13 @@ public class PaginaInicial extends JFrame{
         });
 
         btnSalas.addActionListener(e -> {
-            //new Salas("Salas").setVisible(true);
+            new Salas("Salas").setVisible(true);
             dispose();
         });
 
         // Set the initial size and location of the frame
         setSize(1600, 700);
         setLocationRelativeTo(null); // Center the frame on the screen
-
 
     }
 }

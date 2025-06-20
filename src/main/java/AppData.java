@@ -14,16 +14,21 @@ public class AppData {
     private List<Session> sessions = new ArrayList<>();
     private final String FILE_NAME_SESSIONS = "sessions.dat";
 
+    private List<Sala> salas = new ArrayList<>();
+    private final String FILE_NAME_SALAS = "salas.dat";
+
     private AppData() {
         // Tenta carregar de ficheiros
         loadDataProducts();
         loadDataMovies();
         loadDataSessions();
+        loadDataSalas();
 
         // Se listas estiverem vazias, cria dados de exemplo
         if (barProducts.isEmpty()) loadDefaultBarProducts();
         if (movies.isEmpty()) loadDefaultMovies();
         if (sessions.isEmpty()) loadDefaultSessions();
+        if (salas.isEmpty()) loadDefaultSalas();
     }
 
     public static AppData getInstance() {
@@ -35,10 +40,10 @@ public class AppData {
 
     private void loadDefaultBarProducts() {
         for (int i = 0; i < 6; i++) {
-            barProducts.add(new BarProduct("Coca-cola", 2.5, 10));
-            barProducts.add(new BarProduct("Pepsi", 2.3, 15));
-            barProducts.add(new BarProduct("Fanta", 2.4, 12));
-            barProducts.add(new BarProduct("Sprite", 2.2, 15));
+            this.barProducts.add(new BarProduct("Coca-cola",2.5,10,3,1.0));
+            this.barProducts.add(new BarProduct("Pepsi", 2.3, 15,3,0.6));
+            this.barProducts.add(new BarProduct("Fanta", 2.4,12,2,0.8));
+            this.barProducts.add(new BarProduct("Sprite", 2.2,15,1, 1.2));
         }
     }
 
@@ -47,9 +52,9 @@ public class AppData {
         movies.add(new Movie(2, "Conclave", "Drama", "EUA", "Edward Berger", "Warner Bros.", "English", "Português", 12, 120, 2024));
     }
 
-    private void loadDefaultSessions() {
+    private void loadDefaultSessions() {}
 
-    }
+    private void loadDefaultSalas() {}
 
     // ------------------------- SAVE METHODS -------------------------
 
@@ -64,6 +69,8 @@ public class AppData {
     public void saveDataSessions() {
         saveToFile(FILE_NAME_SESSIONS, sessions);
     }
+
+    public void saveDataSalas() {saveToFile(FILE_NAME_SALAS, salas);}
 
     private void saveToFile(String filename, Object data) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -90,6 +97,10 @@ public class AppData {
         sessions = (List<Session>) loadFromFile(FILE_NAME_SESSIONS);
     }
 
+    @SuppressWarnings("unchecked")
+    private void loadDataSalas() {salas = (List<Sala>) loadFromFile(FILE_NAME_SALAS);}
+
+    @SuppressWarnings("unchecked")
     private Object loadFromFile(String filename) {
         File file = new File(filename);
         if (!file.exists()) return new ArrayList<>();
@@ -119,4 +130,6 @@ public class AppData {
     public List<Session> getSessions() {
         return sessions;
     }
+
+    public List<Sala> getSalas() {return salas;}
 }

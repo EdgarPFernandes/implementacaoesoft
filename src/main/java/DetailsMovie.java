@@ -1,8 +1,9 @@
 import javax.swing.*;
-import java.awt.*;
 
-public class MovieDetails extends JFrame {
-    public MovieDetails(Movie movie) {
+public class DetailsMovie extends JFrame {
+    private JPanel mainPanel;
+
+    public DetailsMovie(Movie movie) {
         setTitle("Detalhes do Filme: " + movie.getTitle());
         setSize(400, 300);
         setLocationRelativeTo(null);
