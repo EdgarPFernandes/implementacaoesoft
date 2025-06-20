@@ -1,0 +1,122 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AppData {
+    private static AppData instance = null;
+
+    private List<BarProduct> barProducts = new ArrayList<>();
+    private final String FILE_NAME_PRODUCTS = "products.dat";
+
+    private List<Movie> movies = new ArrayList<>();
+    private final String FILE_NAME_MOVIES = "movies.dat";
+
+    private List<Session> sessions = new ArrayList<>();
+    private final String FILE_NAME_SESSIONS = "sessions.dat";
+
+    private AppData() {
+        // Tenta carregar de ficheiros
+        loadDataProducts();
+        loadDataMovies();
+        loadDataSessions();
+
+        // Se listas estiverem vazias, cria dados de exemplo
+        if (barProducts.isEmpty()) loadDefaultBarProducts();
+        if (movies.isEmpty()) loadDefaultMovies();
+        if (sessions.isEmpty()) loadDefaultSessions();
+    }
+
+    public static AppData getInstance() {
+        if (instance == null) {
+            instance = new AppData();
+        }
+        return instance;
+    }
+
+    private void loadDefaultBarProducts() {
+        for (int i = 0; i < 6; i++) {
+            barProducts.add(new BarProduct("Coca-cola", 2.5, 10));
+            barProducts.add(new BarProduct("Pepsi", 2.3, 15));
+            barProducts.add(new BarProduct("Fanta", 2.4, 12));
+            barProducts.add(new BarProduct("Sprite", 2.2, 15));
+        }
+    }
+
+    private void loadDefaultMovies() {
+        movies.add(new Movie(1, "Sinner", "Horror", "EUA", "Ryan Coogler", "Warner Bros.", "English", "Português", 16, 137, 2025));
+        movies.add(new Movie(2, "Conclave", "Drama", "EUA", "Edward Berger", "Warner Bros.", "English", "Português", 12, 120, 2024));
+    }
+
+    private void loadDefaultSessions() {
+
+    }
+
+    // ------------------------- SAVE METHODS -------------------------
+
+    public void saveDataProducts() {
+        saveToFile(FILE_NAME_PRODUCTS, barProducts);
+    }
+
+    public void saveDataMovies() {
+        saveToFile(FILE_NAME_MOVIES, movies);
+    }
+
+    public void saveDataSessions() {
+        saveToFile(FILE_NAME_SESSIONS, sessions);
+    }
+
+    private void saveToFile(String filename, Object data) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ------------------------- LOAD METHODS -------------------------
+
+    @SuppressWarnings("unchecked")
+    private void loadDataProducts() {
+        barProducts = (List<BarProduct>) loadFromFile(FILE_NAME_PRODUCTS);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void loadDataMovies() {
+        movies = (List<Movie>) loadFromFile(FILE_NAME_MOVIES);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void loadDataSessions() {
+        sessions = (List<Session>) loadFromFile(FILE_NAME_SESSIONS);
+    }
+
+    private Object loadFromFile(String filename) {
+        File file = new File(filename);
+        if (!file.exists()) return new ArrayList<>();
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            Object obj = in.readObject();
+            if (obj instanceof List<?>) {
+                return obj;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
+
+    // ------------------------- GETTERS -------------------------
+
+    public List<BarProduct> getBarProducts() {
+        return barProducts;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public List<Session> getSessions() {
+        return sessions;
+    }
+}
