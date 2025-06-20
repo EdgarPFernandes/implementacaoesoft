@@ -44,8 +44,11 @@ public class Bar extends JFrame {
     private final int ITEMS_PER_PAGE = 16;
     private Cart cart = new Cart();
 
-    public Bar(String title) throws HeadlessException {
+
+
+    public Bar(String title, Cart cart) throws HeadlessException {
         super(title);
+        this.cart = cart;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
@@ -89,7 +92,7 @@ public class Bar extends JFrame {
         });
 
         bilheteiraButton.addActionListener(e -> {
-            new Bilheteira("Bilheteira").setVisible(true);
+            new Bilheteira("Bilheteira", cart).setVisible(true);
             dispose(); // closes Bar window
         });
 
@@ -183,7 +186,7 @@ public class Bar extends JFrame {
             Product p = entry.getKey();
             int quantity = entry.getValue();
             double subtotal = p.getPrice() * quantity;
-            model.addElement(quantity + "x " + p.getProductName() + " - $" + String.format("%.2f", subtotal));
+            model.addElement(quantity + "x " + p.getProductName() + " - €" + String.format("%.2f", subtotal));
             total += subtotal;
         }
 
@@ -193,6 +196,7 @@ public class Bar extends JFrame {
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Bar("Bar").setVisible(true));
+        Cart cart = new Cart();
+        SwingUtilities.invokeLater(() -> new Bar("Bar", cart).setVisible(true));
     }
 }

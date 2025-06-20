@@ -64,7 +64,11 @@ public class Stock extends JFrame {
             dispose();
         });
 
-        addProductButton.addActionListener(e -> showProductDialog(null));
+        addProductButton.addActionListener(e -> {
+            showProductDialog(null);
+            updateLowStockList();
+            updateTable();
+        });
 
         editProduct.addActionListener(e -> {
             int selectedRow = stockTable.getSelectedRow();
@@ -107,7 +111,7 @@ public class Stock extends JFrame {
     private void showProductDialog(BarProduct existingProduct) {
         JTextField nameField = new JTextField(existingProduct != null ? existingProduct.getProductName() : "");
         JTextField stockField = new JTextField(existingProduct != null ? String.valueOf(existingProduct.getStock()) : "");
-        JTextField minStockField = new JTextField(existingProduct != null ? String.valueOf(existingProduct.getminStock()) : "");
+        JTextField minStockField = new JTextField(existingProduct != null ? String.valueOf(existingProduct.getMinStock()) : "");
         JTextField supplierField = new JTextField(existingProduct != null ? String.valueOf(existingProduct.getSupplierPrice()) : "");
         JTextField priceField = new JTextField(existingProduct != null ? String.valueOf(existingProduct.getPrice()) : "");
 
@@ -154,7 +158,7 @@ public class Stock extends JFrame {
         DefaultListModel<String> model = new DefaultListModel<>();
 
         for (BarProduct product : AppData.getInstance().getBarProducts()) {
-            if (product.getStock() < product.getminStock()) {
+            if (product.getStock() < product.getMinStock()) {
                 model.addElement(product.getProductName() + " - Stock: " + product.getStock());
             }
         }

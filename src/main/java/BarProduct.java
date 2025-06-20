@@ -27,7 +27,7 @@ public class BarProduct extends Product {
         this.stock = stock;
     }
 
-    public double getminStock() {
+    public double getMinStock() {
         return minStock;
     }
 

@@ -23,7 +23,7 @@ public class Bilheteira extends JFrame {
     private JButton button42;
     private JButton nextPageButton;
     private JButton previousPageButton;
-    private JPanel cart;
+    private JPanel cartPanel;
     private JPanel mainPanel;
     private JLabel carrinhoLbl;
     private JPanel cartInfo;
@@ -34,10 +34,16 @@ public class Bilheteira extends JFrame {
     private JButton confirmButton;
     private JComboBox movieFilter;
 
-    public Bilheteira(String title) {
+    private Cart cart;
+
+    public Bilheteira(String title, Cart cart) {
         super(title);
+        this.cart = cart;
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
     }
+
+
+
 }
