@@ -77,15 +77,27 @@ public class Bilheteira extends JFrame {
                         "No Items",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                // Here you would typically process payment
+                // Process payment
                 double total = cart.getTotal();
                 JOptionPane.showMessageDialog(this,
                         String.format("Total: %.2f€\nPayment processed!", total),
                         "Purchase Complete",
                         JOptionPane.INFORMATION_MESSAGE);
+
+                // Clear cart
                 cart.clear();
                 updateCartDisplay();
+
+                // Force refresh of seat display if needed
+                if (selectedMovie != null) {
+                    updateSessionButtons();
+                }
             }
+        });
+
+        barButton.addActionListener(e -> {
+            new Bar("Bar",cart).setVisible(true);
+            dispose(); // closes Bar window
         });
 
         setupButtons();
@@ -94,7 +106,7 @@ public class Bilheteira extends JFrame {
 
     public Bilheteira(String title, Cart cart) {
         super(title);
-        this.cart = new Cart();
+        this.cart = cart;
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -110,8 +122,44 @@ public class Bilheteira extends JFrame {
                 System.out.println("- " + s.getMovie() + " at " + s.getHora())
         );
 
+        cancelButton.addActionListener(e -> {
+            cart.clear();
+            updateCartDisplay();
+        });
+
+        confirmButton.addActionListener(e -> {
+            if (cart.getItems().isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Cart is empty",
+                        "No Items",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                // Process payment
+                double total = cart.getTotal();
+                JOptionPane.showMessageDialog(this,
+                        String.format("Total: %.2f€\nPayment processed!", total),
+                        "Purchase Complete",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                // Clear cart
+                cart.clear();
+                updateCartDisplay();
+
+                // Force refresh of seat display if needed
+                if (selectedMovie != null) {
+                    updateSessionButtons();
+                }
+            }
+        });
+
+        barButton.addActionListener(e -> {
+            new Bar("Bar",cart).setVisible(true);
+            dispose(); // closes Bar window
+        });
+
         setupButtons();
         updateMovieButtons();
+        updateCartDisplay();
     }
 
     private void setupButtons() {
@@ -288,20 +336,28 @@ public class Bilheteira extends JFrame {
             for (int col = 0; col < cols; col++) {
                 char rowChar = (char) ('A' + row);
                 int seatNum = col + 1;
-                JButton seatBtn = new JButton(rowChar + "" + seatNum);
+                Seat seat = new Seat(rowChar, seatNum);
+                JButton seatBtn = new JButton(seat.getSeatCode());
 
-                // Style the button
-                seatBtn.setBackground(Color.GREEN);
+                // Check if seat is reserved
+                if (session.isSeatReserved(seat)) {
+                    seatBtn.setBackground(Color.RED);
+                    seatBtn.setEnabled(false); // Disable reserved seats
+                } else {
+                    seatBtn.setBackground(Color.GREEN);
+                    seatBtn.setEnabled(true);
+                }
+
                 seatBtn.setOpaque(true);
                 seatBtn.setBorderPainted(false);
 
                 seatBtn.addActionListener(e -> {
                     if (seatBtn.getBackground() == Color.GREEN) {
                         seatBtn.setBackground(Color.YELLOW);
-                        selectedSeats.add(new Seat(rowChar, seatNum));
-                    } else {
+                        selectedSeats.add(seat);
+                    } else if (seatBtn.getBackground() == Color.YELLOW) {
                         seatBtn.setBackground(Color.GREEN);
-                        selectedSeats.removeIf(s -> s.getRow() == rowChar && s.getNumber() == seatNum);
+                        selectedSeats.remove(seat);
                     }
                 });
 
@@ -343,6 +399,9 @@ public class Bilheteira extends JFrame {
 
     private void createTickets(List<Seat> seats, Session session, String ticketType, double price) {
         for (Seat seat : seats) {
+            // Reserve the seat
+            session.reserveSeat(seat);
+
             Ticket ticket = new Ticket(
                     String.format("%s (%s - %s %s)",
                             ticketType,
@@ -372,17 +431,25 @@ public class Bilheteira extends JFrame {
     }
 
 
+    // In Bilheteira.java - show each ticket separately
     private void updateCartDisplay() {
         DefaultListModel<String> model = new DefaultListModel<>();
+        double total = 0.0;
+
         for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
-            Product product = entry.getKey();
-            model.addElement(String.format("%s x%d - %.2f€",
-                    product.getProductName(),
-                    entry.getValue(),
-                    product.getPrice() * entry.getValue()));
+            Product p = entry.getKey();
+            int quantity = entry.getValue();
+
+            // For tickets, show each one individually
+            for (int i = 0; i < quantity; i++) {
+                double price = p.getPrice();
+                model.addElement(p.getProductName() + " - €" + String.format("%.2f", price));
+                total += price;
+            }
         }
+
         list1.setModel(model);
-        totalValue.setText(String.format("%.2f€", cart.getTotal()));
+        totalValue.setText("€" + String.format("%.2f", total));
     }
 
 
