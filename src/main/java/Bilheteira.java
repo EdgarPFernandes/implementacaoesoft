@@ -36,6 +36,14 @@ public class Bilheteira extends JFrame {
 
     private Cart cart;
 
+    public Bilheteira(String title) {
+        super(title);
+        this.cart = cart;
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+    }
+
     public Bilheteira(String title, Cart cart) {
         super(title);
         this.cart = cart;

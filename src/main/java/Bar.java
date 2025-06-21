@@ -44,7 +44,70 @@ public class Bar extends JFrame {
     private final int ITEMS_PER_PAGE = 16;
     private Cart cart = new Cart();
 
+    public Bar(String title) throws HeadlessException {
+        super(title);
+        this.cart = cart;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
+        pack();
 
+        // Setup product button grid
+        setupProductButtons();
+
+        // Show first page of products
+        updateButtonLabels();
+
+        // Pagination: Previous
+        previousPageButton.addActionListener(e -> {
+            if (currentPage > 0) {
+                currentPage--;
+                updateButtonLabels();
+            }
+        });
+
+        // Pagination: Next
+        nextPageButton.addActionListener(e -> {
+            int maxPages = (int) Math.ceil((double) getProducts().size() / ITEMS_PER_PAGE);
+            if (currentPage < maxPages - 1) {
+                currentPage++;
+                updateButtonLabels();
+            }
+        });
+
+        cancelButton.addActionListener(e -> clearCart());
+        confirmButton.addActionListener(e -> {
+            if (cart.getItems().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "O carrinho está vazio.");
+            } else {
+                for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    // Ensure it's a BarProduct before updating stock
+                    if (product instanceof BarProduct) {
+                        BarProduct bp = (BarProduct) product;
+                        double newStock = bp.getStock() - quantity;
+                        bp.setStock(Math.max(0, newStock));
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Compra efetuada!");
+                clearCart();
+                updateButtonLabels();
+            }
+        });
+
+        viewStockButton.addActionListener(e -> {
+            new Stock("Stock").setVisible(true);
+            dispose(); // closes Bar window
+        });
+
+        bilheteiraButton.addActionListener(e -> {
+            new Bilheteira("Bilheteira", cart).setVisible(true);
+            dispose(); // closes Bar window
+        });
+
+
+    }
 
     public Bar(String title, Cart cart) throws HeadlessException {
         super(title);
@@ -81,8 +144,20 @@ public class Bar extends JFrame {
             if (cart.getItems().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "O carrinho está vazio.");
             } else {
+                for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    // Ensure it's a BarProduct before updating stock
+                    if (product instanceof BarProduct) {
+                        BarProduct bp = (BarProduct) product;
+                        double newStock = bp.getStock() - quantity;
+                        bp.setStock(Math.max(0, newStock));
+                    }
+                }
                 JOptionPane.showMessageDialog(this, "Compra efetuada!");
                 clearCart();
+                updateButtonLabels();
             }
         });
 
@@ -155,23 +230,6 @@ public class Bar extends JFrame {
         }
     }
 
-    private void addToCartList(Product p) {
-        DefaultListModel<String> model;
-
-        if (list1.getModel() instanceof DefaultListModel) {
-            model = (DefaultListModel<String>) list1.getModel();
-        } else {
-            model = new DefaultListModel<>();
-            list1.setModel(model);
-        }
-
-        model.addElement(p.getProductName() + " - €" + String.format("%.2f", p.getPrice()));
-    }
-
-    private void updateTotalField() {
-        totalValue.setText(String.format("€%.2f", cart.getTotal()));
-    }
-
     private void clearCart() {
         cart.clear();
         list1.setModel(new DefaultListModel<>());
@@ -193,6 +251,8 @@ public class Bar extends JFrame {
         list1.setModel(model);
         totalValue.setText("€" + String.format("%.2f", total));
     }
+
+
 
 
     public static void main(String[] args) {

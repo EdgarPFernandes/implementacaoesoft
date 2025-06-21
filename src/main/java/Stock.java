@@ -22,42 +22,42 @@ public class Stock extends JFrame {
     private int currentPage = 0;
 
     public Stock(String title) {
-            super(title);
-            setContentPane(mainPanel);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            pack();
+        super(title);
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
 
-            updateLowStockList();
+        updateLowStockList();
 
-            // Initialize table model
-            stockTable.setModel(new DefaultTableModel(
-                    new Object[]{"Nome Produto", "Quantidade em Stock", "Preço compra", "Preço venda"}, 0
-            ));
+        // Initialize table model
+        stockTable.setModel(new DefaultTableModel(
+                new Object[]{"Nome Produto", "Quantidade em Stock", "Preço compra", "Preço venda"}, 0
+        ));
 
-            editProduct.setVisible(false);
-            stockTable.getSelectionModel().addListSelectionListener(e -> {
-                boolean rowSelected = stockTable.getSelectedRow() != -1;
-                editProduct.setVisible(rowSelected);
-            });
+        editProduct.setVisible(false);
+        stockTable.getSelectionModel().addListSelectionListener(e -> {
+            boolean rowSelected = stockTable.getSelectedRow() != -1;
+            editProduct.setVisible(rowSelected);
+        });
 
-            // Load first page
-            updateTable();
+        // Load first page
+        updateTable();
 
-            // Navigation buttons
-            previousPageBtn.addActionListener(e -> {
-                if (currentPage > 0) {
-                    currentPage--;
-                    updateTable();
-                }
-            });
+        // Navigation buttons
+        previousPageBtn.addActionListener(e -> {
+            if (currentPage > 0) {
+                currentPage--;
+                updateTable();
+            }
+        });
 
-            nextPageBtn.addActionListener(e -> {
-                int totalPages = (int) Math.ceil((double) AppData.getInstance().getBarProducts().size() / ITEMS_PER_PAGE);
-                if (currentPage < totalPages - 1) {
-                    currentPage++;
-                    updateTable();
-                }
-            });
+        nextPageBtn.addActionListener(e -> {
+            int totalPages = (int) Math.ceil((double) AppData.getInstance().getBarProducts().size() / ITEMS_PER_PAGE);
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updateTable();
+            }
+        });
 
         barButton.addActionListener(e -> {
             new Bar("Bar").setVisible(true);
