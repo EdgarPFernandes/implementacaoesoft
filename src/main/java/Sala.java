@@ -36,4 +36,9 @@ public class Sala implements Serializable {
     public void setTipoLugares(String tipoLugares) {this.tipoLugares = tipoLugares;}
     public void setCaracEspecial(String caracEspecial) {this.caracEspecial = caracEspecial;}
     public void setAtiva(boolean atividade) {this.atividade = atividade;}
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

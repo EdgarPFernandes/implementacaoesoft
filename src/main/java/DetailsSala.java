@@ -61,9 +61,6 @@ public class DetailsSala extends JFrame {
         });
 
         // Ação: voltar
-        voltarButton.addActionListener(e -> {
-            new Salas("Gestão de Salas").setVisible(true);
-            dispose(); // Fecha esta janela
-        });
+        voltarButton.addActionListener(e -> dispose());
     }
 }

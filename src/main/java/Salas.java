@@ -119,7 +119,6 @@ public class Salas extends JFrame {
                 if (salaIndex < salas.size()) {
                     Sala selected = salas.get(salaIndex);
                     new DetailsSala(selected).setVisible(true);
-                    dispose();
                 }
             });
         }

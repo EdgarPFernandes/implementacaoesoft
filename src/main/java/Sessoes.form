@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Sessoes">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1600" height="700"/>
@@ -11,57 +11,52 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="c1ace" binding="leftButtons" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <vspacer id="6f1e6">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <grid id="b5053" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="100" height="600"/>
-            <preferred-size width="100" height="600"/>
-            <maximum-size width="100" height="600"/>
-          </grid>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <background color="-11119018"/>
-          <foreground color="-11119018"/>
-        </properties>
+        <properties/>
         <border type="none"/>
         <children>
-          <component id="67c00" class="javax.swing.JButton" binding="back">
+          <component id="486ae" class="javax.swing.JButton" binding="back">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <actionCommand value="Bar"/>
-              <label value="Back"/>
               <text value="Back"/>
             </properties>
           </component>
-          <component id="e308d" class="javax.swing.JButton" binding="addSessions">
+          <component id="bacbd" class="javax.swing.JButton" binding="addSessions">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <actionCommand value="Bar"/>
-              <label value="Add Sessão"/>
-              <text value="Add Sessão"/>
+              <text value="Add Sessao"/>
             </properties>
+          </component>
+          <vspacer id="37ced">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <component id="e23ce" class="javax.swing.JTable" binding="tableSessions">
+            <constraints>
+              <grid row="0" column="1" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>
-      <component id="9a6cb" class="javax.swing.JTable" binding="tableSessions">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="100"/>
-            <preferred-size width="150" height="50"/>
-            <maximum-size width="-1" height="100"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <grid id="2b260" binding="navbarPanel" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="549f7" binding="navbarPanel" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="1600" height="80"/>
           </grid>
         </constraints>
@@ -71,7 +66,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="fe6b0" class="javax.swing.JButton" binding="btnFilmes">
+          <component id="af547" class="javax.swing.JButton" binding="btnFilmes">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -86,7 +81,7 @@
               <text value="FILMES"/>
             </properties>
           </component>
-          <component id="5065b" class="javax.swing.JButton" binding="btnSessoes">
+          <component id="e7152" class="javax.swing.JButton" binding="btnSessoes">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -100,7 +95,7 @@
               <text value="SESSÕES"/>
             </properties>
           </component>
-          <component id="b9f8a" class="javax.swing.JButton" binding="btnBar">
+          <component id="59b1a" class="javax.swing.JButton" binding="btnBar">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -113,7 +108,7 @@
               <text value="BAR"/>
             </properties>
           </component>
-          <component id="fe546" class="javax.swing.JButton" binding="btnBilheteira">
+          <component id="363f5" class="javax.swing.JButton" binding="btnBilheteira">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -126,7 +121,7 @@
               <text value="BILHETEIRA"/>
             </properties>
           </component>
-          <component id="c93d1" class="javax.swing.JButton" binding="btnConsulta">
+          <component id="69e82" class="javax.swing.JButton" binding="btnConsulta">
             <constraints>
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -139,7 +134,7 @@
               <text value="CONSULTA"/>
             </properties>
           </component>
-          <component id="3ba5b" class="javax.swing.JButton" binding="btnSalas">
+          <component id="37489" class="javax.swing.JButton" binding="btnSalas">
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>

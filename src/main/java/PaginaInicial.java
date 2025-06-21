@@ -6,6 +6,7 @@ import java.util.Map;
 public class PaginaInicial extends JFrame{
     public JPanel mainPanel;
     public JPanel navbarPanel;
+
     public JButton btnFilmes;
     public JButton btnSessoes;
     public JButton btnBar;
