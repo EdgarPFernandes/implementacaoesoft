@@ -113,12 +113,14 @@ public class DadosFilmes extends JFrame {
         sorted.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
 
         DefaultTableModel model = (DefaultTableModel) dadosFilmesTable.getModel();
+        /*
         for (int i = 0; i < Math.min(10, sorted.size()); i++) {
             Movie movie = AppData.getInstance().getMovieByTitle(sorted.get(i).getKey());
             double lucro = sorted.get(i).getValue();
             String licenca = movie.getDataInicioLicenca() + " até " + movie.getDataFimLicenca();
             model.addRow(new Object[]{movie.getTitle(), licenca, lucro});
         }
+        */
     }
 
 }
