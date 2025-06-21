@@ -12,6 +12,7 @@ public class AddMovie extends JFrame {
     private JTextField ageField;
     private JTextField durationField;
     private JTextField yearField;
+    private JTextField priceField;
 
     private JButton confirmButton;
     private JButton cancelButton;
@@ -23,7 +24,7 @@ public class AddMovie extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        JPanel formPanel = new JPanel(new GridLayout(11, 2, 5, 5));
+        JPanel formPanel = new JPanel(new GridLayout(12, 2, 5, 5));
 
         // Adiciona ao painel
         formPanel.add(new JLabel("Título:"));
@@ -46,6 +47,8 @@ public class AddMovie extends JFrame {
         formPanel.add(durationField);
         formPanel.add(new JLabel("Ano:"));
         formPanel.add(yearField);
+        formPanel.add(new JLabel("Preço Licenciamento (mil):"));
+        formPanel.add(priceField);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(confirmButton);
@@ -67,10 +70,11 @@ public class AddMovie extends JFrame {
                 int age = Integer.parseInt(ageField.getText());
                 int duration = Integer.parseInt(durationField.getText());
                 int year = Integer.parseInt(yearField.getText());
+                double price = Integer.parseInt(priceField.getText());
 
                 int nextId = AppData.getInstance().getMovies().size() + 1;
 
-                Movie movie = new Movie(nextId, movieTitle, genre, country, director, studio, language, subtitles, age, duration, year);
+                Movie movie = new Movie(nextId, movieTitle, genre, country, director, studio, language, subtitles, age, duration, year, price);
                 AppData.getInstance().getMovies().add(movie);
                 AppData.getInstance().saveDataMovies();
 

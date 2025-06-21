@@ -46,8 +46,8 @@ public class AppData {
     }
 
     private void loadDefaultMovies() {
-        movies.add(new Movie(1, "Sinner", "Horror", "EUA", "Ryan Coogler", "Warner Bros.", "English", "Português", 16, 137, 2025));
-        movies.add(new Movie(2, "Conclave", "Drama", "EUA", "Edward Berger", "Warner Bros.", "English", "Português", 12, 120, 2024));
+        movies.add(new Movie(1, "Sinner", "Horror", "EUA", "Ryan Coogler", "Warner Bros.", "English", "Português", 16, 137, 2025, 35.2));
+        movies.add(new Movie(2, "Conclave", "Drama", "EUA", "Edward Berger", "Warner Bros.", "English", "Português", 12, 120, 2024, 30.5));
     }
 
     private void loadDefaultSessions() {
