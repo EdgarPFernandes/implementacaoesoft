@@ -112,7 +112,35 @@ public class Bar extends JFrame {
             dispose(); // closes Bar window
         });
 
+        btnBar.addActionListener(e -> {
+            new Bar("Bar").setVisible(true);
+            dispose();
+        });
 
+        btnBilheteira.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose();
+        });
+
+        btnFilmes.addActionListener(e -> {
+            new Filmes("Filmes").setVisible(true);
+            dispose();
+        });
+
+        btnSessoes.addActionListener(e -> {
+            new Sessoes("Sessoes").setVisible(true);
+            dispose();
+        });
+
+        btnConsulta.addActionListener(e -> {
+            new Consulta("Consulta").setVisible(true);
+            dispose();
+        });
+
+        btnSalas.addActionListener(e -> {
+            new Salas("Salas").setVisible(true);
+            dispose();
+        });
     }
 
     public Bar(String title, Cart cart) throws HeadlessException {
@@ -179,6 +207,35 @@ public class Bar extends JFrame {
         });
         updateCartDisplay();
 
+        btnBar.addActionListener(e -> {
+            new Bar("Bar").setVisible(true);
+            dispose();
+        });
+
+        btnBilheteira.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose();
+        });
+
+        btnFilmes.addActionListener(e -> {
+            new Filmes("Filmes").setVisible(true);
+            dispose();
+        });
+
+        btnSessoes.addActionListener(e -> {
+            new Sessoes("Sessoes").setVisible(true);
+            dispose();
+        });
+
+        btnConsulta.addActionListener(e -> {
+            new Consulta("Consulta").setVisible(true);
+            dispose();
+        });
+
+        btnSalas.addActionListener(e -> {
+            new Salas("Salas").setVisible(true);
+            dispose();
+        });
     }
 
     private void setupProductButtons() {

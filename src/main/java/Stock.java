@@ -17,6 +17,12 @@ public class Stock extends JFrame {
     private JTable stockTable;
     private JButton previousPageBtn;
     private JButton nextPageBtn;
+    private JButton btnFilmes;
+    private JButton btnSessoes;
+    private JButton btnBar;
+    private JButton btnBilheteira;
+    private JButton btnConsulta;
+    private JButton btnSalas;
 
     private final int ITEMS_PER_PAGE = 34;
     private int currentPage = 0;
@@ -84,6 +90,36 @@ public class Stock extends JFrame {
             showProductDialog(product);
             updateTable();
             updateLowStockList();
+        });
+
+        btnBar.addActionListener(e -> {
+            new Bar("Bar").setVisible(true);
+            dispose();
+        });
+
+        btnBilheteira.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose();
+        });
+
+        btnFilmes.addActionListener(e -> {
+            new Filmes("Filmes").setVisible(true);
+            dispose();
+        });
+
+        btnSessoes.addActionListener(e -> {
+            new Sessoes("Sessoes").setVisible(true);
+            dispose();
+        });
+
+        btnConsulta.addActionListener(e -> {
+            new Consulta("Consulta").setVisible(true);
+            dispose();
+        });
+
+        btnSalas.addActionListener(e -> {
+            new Salas("Salas").setVisible(true);
+            dispose();
         });
 
 
