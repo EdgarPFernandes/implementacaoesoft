@@ -167,10 +167,11 @@ public class Bar extends JFrame {
         });
 
         bilheteiraButton.addActionListener(e -> {
-            new Bilheteira("Bilheteira", cart).setVisible(true);
+            Bilheteira bilheteira = new Bilheteira("Bilheteira", cart);
+            bilheteira.setVisible(true);
             dispose(); // closes Bar window
         });
-
+        updateCartDisplay();
 
     }
 
