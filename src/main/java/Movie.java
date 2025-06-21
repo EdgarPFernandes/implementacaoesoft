@@ -12,9 +12,10 @@ public class Movie implements Serializable {
     private int age;
     private int duration;
     private int movieYear;
+    private Double precoLicenciamento;
 
     public Movie(int id, String movieName, String movieGenre, String origin, String director,
-                 String studio, String languages, String subtitles, int age, int duration, int movieYear) {
+                 String studio, String languages, String subtitles, int age, int duration, int movieYear, Double precoLicenciamento) {
         this.id = id;
         this.movieName = movieName;
         this.movieGenre = movieGenre;
@@ -26,6 +27,7 @@ public class Movie implements Serializable {
         this.age = age;
         this.duration = duration;
         this.movieYear = movieYear;
+        this.precoLicenciamento = precoLicenciamento;
     }
 
     //GETs
@@ -51,6 +53,8 @@ public class Movie implements Serializable {
 
     public int getYear() {return movieYear;}
 
+    public Double getPrecoLicenciamento() {return precoLicenciamento;}
+
     //SETs
     public void setId(int id) {this.id = id;}
 
@@ -73,6 +77,8 @@ public class Movie implements Serializable {
     public void setDuration(int duration) {this.duration = duration;}
 
     public void setMovieYear(int movieYear) {this.movieYear = movieYear;}
+
+    public void setPrecoLicenciamento(double precoLicenciamento) {this.precoLicenciamento = precoLicenciamento;}
 
     @Override
     public String toString() {

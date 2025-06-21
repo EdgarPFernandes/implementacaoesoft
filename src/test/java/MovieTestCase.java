@@ -5,7 +5,7 @@ public class MovieTestCase {
 
     @Test
     public void testMovieCreation() {
-        Movie movie = new Movie(1, "Sinner", "Horror", "EUA", "Ryan Coogler", "WB", "EN", "PT", 16,120,2025);
+        Movie movie = new Movie(1, "Sinner", "Horror", "EUA", "Ryan Coogler", "WB", "EN", "PT", 16,120,2025, 35.2);
 
         assertEquals("Sinner", movie.getTitle());
         assertEquals("Horror", movie.getGenre());
@@ -13,7 +13,7 @@ public class MovieTestCase {
     }
 
     @Test public void testMovieUpdate() {
-        Movie m = new Movie(1, "Old Title", "Ação", "Brasil", "João", "X Filmes", "PT", "EN", 14, 100, 2022);
+        Movie m = new Movie(1, "Old Title", "Ação", "Brasil", "João", "X Filmes", "PT", "EN", 14, 100, 2022, 35.2);
 
         m.setMovieName("New Title");
         m.setMovieGenre("Drama");
