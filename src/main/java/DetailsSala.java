@@ -6,7 +6,8 @@ public class DetailsSala extends JFrame {
     public JPanel mainPanel;
 
     private JLabel nomeLabel;
-    private JLabel capacidadeLabel;
+    private JLabel larguraLabel;
+    private JLabel comprimentoLabel;
     private JLabel somLabel;
     private JLabel tipoSalaLabel;
     private JLabel tipoLugaresLabel;
@@ -26,7 +27,8 @@ public class DetailsSala extends JFrame {
 
         // Labels
         nomeLabel = new JLabel("Nome: " + sala.getNome());
-        capacidadeLabel = new JLabel("Capacidade: " + sala.getCapacidade());
+        larguraLabel = new JLabel("Largura: " + sala.getLargura());
+        comprimentoLabel = new JLabel("Comprimento: " + sala.getComprimento());
         somLabel = new JLabel("Tipo de Som: " + sala.getTipoSom());
         tipoSalaLabel = new JLabel("Tipo de Sala: " + sala.getTipoSala());
         tipoLugaresLabel = new JLabel("Tipo de Lugares: " + sala.getTipoLugares());
@@ -38,9 +40,12 @@ public class DetailsSala extends JFrame {
         voltarButton = new JButton("Voltar atrás");
 
         // Painel de conteúdo
-        JPanel infoPanel = new JPanel(new GridLayout(7, 1, 5, 5));
+        JPanel infoPanel = new JPanel(new GridLayout(8, 1, 5, 5));
+
+
         infoPanel.add(nomeLabel);
-        infoPanel.add(capacidadeLabel);
+        infoPanel.add(larguraLabel);
+        infoPanel.add(comprimentoLabel);
         infoPanel.add(somLabel);
         infoPanel.add(tipoSalaLabel);
         infoPanel.add(tipoLugaresLabel);

@@ -28,6 +28,7 @@ public class AppData {
         if (barProducts.isEmpty()) loadDefaultBarProducts();
         if (movies.isEmpty()) loadDefaultMovies();
         if (sessions.isEmpty()) loadDefaultSessions();
+        if (salas.isEmpty()) loadDefaultSalas();
     }
 
     public static AppData getInstance() {

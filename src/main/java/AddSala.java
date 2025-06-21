@@ -8,7 +8,8 @@ public class AddSala extends JFrame {
     private JPanel requisitosPanel;
 
     private JTextField nomeField;
-    private JTextField capacidadeField;
+    private JTextField larguraField;
+    private JTextField comprimentoField1;
     private JTextField somField;
     private JTextField salaField;
     private JTextField lugaresField;
@@ -25,11 +26,13 @@ public class AddSala extends JFrame {
         setLocationRelativeTo(null);
 
         // Criar e configurar painéis
-        JPanel textPanel = new JPanel(new GridLayout(6, 2, 5, 5));
+        JPanel textPanel = new JPanel(new GridLayout(7, 2, 5, 5));
         textPanel.add(new JLabel("Nome:"));
         textPanel.add(nomeField);
-        textPanel.add(new JLabel("Capacidade:"));
-        textPanel.add(capacidadeField);
+        textPanel.add(new JLabel("Largura:"));
+        textPanel.add(larguraField);
+        textPanel.add(new JLabel("Comprimento:"));
+        textPanel.add(comprimentoField1);
         textPanel.add(new JLabel("Tipo de Som:"));
         textPanel.add(somField);
         textPanel.add(new JLabel("Tipo de Sala:"));
@@ -53,7 +56,8 @@ public class AddSala extends JFrame {
         confirmationButton.addActionListener(e -> {
             try {
                 String nome = nomeField.getText().trim();
-                int capacidade = Integer.parseInt(capacidadeField.getText().trim());
+                int largura = Integer.parseInt(larguraField.getText().trim());
+                int comprimento = Integer.parseInt(comprimentoField1.getText().trim());
                 String tipoSom = somField.getText().trim();
                 String tipoSala = salaField.getText().trim();
                 String tipoLugares = lugaresField.getText().trim();
@@ -64,7 +68,7 @@ public class AddSala extends JFrame {
                     return;
                 }
 
-                Sala nova = new Sala(nome, capacidade, tipoSom, tipoSala, tipoLugares, caracEspecial);
+                Sala nova = new Sala(nome, largura, comprimento, tipoSom, tipoSala, tipoLugares, caracEspecial);
                 AppData.getInstance().getSalas().add(nova);
                 AppData.getInstance().saveDataSalas();
 

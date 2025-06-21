@@ -6,7 +6,8 @@ public class ConfigurarSala extends JFrame {
 
     private Sala sala;
     private JTextField nomeField;
-    private JTextField capacidadeField;
+    private JTextField larguraField;
+    private JTextField comprimentoField;
     private JTextField somField;
     private JTextField tipoSalaField;
     private JTextField tipoLugaresField;
@@ -19,15 +20,16 @@ public class ConfigurarSala extends JFrame {
         this.sala = sala;
 
         setTitle("Configurar Sala");
-        setSize(400, 350);
+        setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Painel de formulário
-        JPanel formPanel = new JPanel(new GridLayout(7, 2, 5, 5));
+        JPanel formPanel = new JPanel(new GridLayout(8, 2, 5, 5));
 
         nomeField = new JTextField(sala.getNome());
-        capacidadeField = new JTextField(String.valueOf(sala.getCapacidade()));
+        larguraField = new JTextField(String.valueOf(sala.getLargura()));
+        comprimentoField = new JTextField(String.valueOf(sala.getComprimento()));
         somField = new JTextField(sala.getTipoSom());
         tipoSalaField = new JTextField(sala.getTipoSala());
         tipoLugaresField = new JTextField(sala.getTipoLugares());
@@ -36,8 +38,10 @@ public class ConfigurarSala extends JFrame {
 
         formPanel.add(new JLabel("Nome:"));
         formPanel.add(nomeField);
-        formPanel.add(new JLabel("Capacidade:"));
-        formPanel.add(capacidadeField);
+        formPanel.add(new JLabel("Largura:"));
+        formPanel.add(larguraField);
+        formPanel.add(new JLabel("Comprimento:"));
+        formPanel.add(comprimentoField);
         formPanel.add(new JLabel("Tipo de Som:"));
         formPanel.add(somField);
         formPanel.add(new JLabel("Tipo de Sala:"));
@@ -65,7 +69,8 @@ public class ConfigurarSala extends JFrame {
         guardarButton.addActionListener(e -> {
             try {
                 sala.setNome(nomeField.getText().trim());
-                sala.setCapacidade(Integer.parseInt(capacidadeField.getText().trim()));
+                sala.setLargura(Integer.parseInt(larguraField.getText().trim()));
+                sala.setComprimento(Integer.parseInt(comprimentoField.getText().trim()));
                 sala.setTipoSom(somField.getText().trim());
                 sala.setTipoSala(tipoSalaField.getText().trim());
                 sala.setTipoLugares(tipoLugaresField.getText().trim());
