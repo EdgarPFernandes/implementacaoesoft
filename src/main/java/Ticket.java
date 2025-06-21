@@ -22,6 +22,7 @@ public class Ticket extends Product{
         return seat;
     }
 
+
     @Override
     public String toString() {
         return String.format("%s - %s (Seat: %s, Sala: %s, Time: %s)",

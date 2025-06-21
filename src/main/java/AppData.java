@@ -134,4 +134,8 @@ public class AppData {
     }
 
     public List<Sala> getSalas() {return salas;}
+
+    public List<Ticket> getTicketType() {
+        return getTicketType();
+    }
 }

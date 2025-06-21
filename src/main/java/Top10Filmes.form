@@ -143,8 +143,8 @@
               <foreground color="-2104859"/>
               <horizontalAlignment value="0"/>
               <opaque value="true"/>
-              <scrollOffset value="1"/>
-              <text value="Filme Mais Vendido Minecraft"/>
+              <scrollOffset value="0"/>
+              <text value="Filme Mais Vendido"/>
             </properties>
           </component>
           <component id="fc6cf" class="javax.swing.JTextField" binding="generoMaisAssitido">

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Top10Filmes extends JFrame {
     private JPanel mainPanel;
@@ -26,17 +28,21 @@ public class Top10Filmes extends JFrame {
     private JTextField taxeMediaSala;
     private JTable top10FilmesTable;
 
-
     public Top10Filmes(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
 
+        // Setup table model
         top10FilmesTable.setModel(new DefaultTableModel(
-                new Object[]{"Nome Filme", "Quantidade de Bilhetes Vendidos"}, 10
+                new Object[]{"Nome Filme", "Quantidade de Bilhetes Vendidos"}, 0
         ));
 
+        // Populate Top 10 table with mock data
+        populateTop10Table();
+
+        // Navigation buttons
         btnBar.addActionListener(e -> {
             new Bar("Bar").setVisible(true);
             dispose();
@@ -68,31 +74,47 @@ public class Top10Filmes extends JFrame {
         });
 
         btnTop10.addActionListener(e -> {
-            // Implement the action for Top 10 button
             new Top10Filmes("Top 10 Filmes").setVisible(true);
             dispose();
         });
 
         btnTipoBilhete.addActionListener(e -> {
-            // Implement the action for Tipo Bilhete button
             new TipoBilhetes("Tipo Bilhetes").setVisible(true);
             dispose();
         });
 
         btnTipoSala.addActionListener(e -> {
-            // Implement the action for Tipo Sala button
             new TipoSalas("Tipo Salas").setVisible(true);
             dispose();
         });
 
         btnDadosFilme.addActionListener(e -> {
-            // Implement the action for Dados Filme button
             new DadosFilmes("Dados").setVisible(true);
             dispose();
         });
 
-        // Set the initial size and location of the frame
+        // Frame size and position
         setSize(1600, 700);
-        setLocationRelativeTo(null); // Center the frame on the screen
+        setLocationRelativeTo(null); // Center window
     }
+
+    private void populateTop10Table() {
+        Map<String, Integer> ticketCounts = new HashMap<>();
+        for (Ticket ticket : AppData.getInstance().getTicketType()) {
+            String movie = ticket.getSession().getMovie();
+            ticketCounts.put(movie, ticketCounts.getOrDefault(movie, 0) + 1);
+        }
+
+        List<Map.Entry<String, Integer>> sorted = new ArrayList<>(ticketCounts.entrySet());
+        sorted.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        DefaultTableModel model = (DefaultTableModel) top10FilmesTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < Math.min(10, sorted.size()); i++) {
+            Map.Entry<String, Integer> entry = sorted.get(i);
+            model.addRow(new Object[]{entry.getKey(), entry.getValue()});
+        }
+    }
+
+
 }

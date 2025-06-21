@@ -78,7 +78,7 @@ public class Consulta extends JFrame {
 
         btnTipoSala.addActionListener(e -> {
             // Implement the action for Tipo Sala button
-            new TipoBilhetes("Tipo Sala").setVisible(true);
+            new TipoSalas("Tipo Sala").setVisible(true);
             dispose();
         });
 

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class TipoSalas extends JFrame {
     private JPanel mainPanel;
@@ -26,7 +28,6 @@ public class TipoSalas extends JFrame {
     private JTextField taxeMediaSala;
     private JTable tipoSalasTable;
 
-
     public TipoSalas(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,8 +35,10 @@ public class TipoSalas extends JFrame {
         pack();
 
         tipoSalasTable.setModel(new DefaultTableModel(
-                new Object[]{"Nome Filme", "Quantidade de Bilhetes Vendidos"}, 10
+                new Object[]{"Nome Sala", "Quantidade de Bilhetes Vendidos"}, 0
         ));
+
+        populateTipoSalasTable();
 
         btnBar.addActionListener(e -> {
             new Bar("Bar").setVisible(true);
@@ -68,31 +71,42 @@ public class TipoSalas extends JFrame {
         });
 
         btnTop10.addActionListener(e -> {
-            // Implement the action for Top 10 button
             new Top10Filmes("Top 10 Filmes").setVisible(true);
             dispose();
         });
 
         btnTipoBilhete.addActionListener(e -> {
-            // Implement the action for Tipo Bilhete button
             new TipoBilhetes("Tipo Bilhetes").setVisible(true);
             dispose();
         });
 
         btnTipoSala.addActionListener(e -> {
-            // Implement the action for Tipo Sala button
             new TipoSalas("Tipo Salas").setVisible(true);
             dispose();
         });
 
         btnDadosFilme.addActionListener(e -> {
-            // Implement the action for Dados Filme button
             new DadosFilmes("Dados Filme").setVisible(true);
             dispose();
         });
 
-        // Set the initial size and location of the frame
         setSize(1600, 700);
         setLocationRelativeTo(null); // Center the frame on the screen
+    }
+
+    private void populateTipoSalasTable() {
+        Map<String, Integer> salaMap = new HashMap<>();
+        for (Ticket ticket : AppData.getInstance().getTicketType()) {
+            String sala = ticket.getSession().getSala();
+            salaMap.put(sala, salaMap.getOrDefault(sala, 0) + 1);
+        }
+
+        List<Map.Entry<String, Integer>> sorted = new ArrayList<>(salaMap.entrySet());
+        sorted.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        DefaultTableModel model = (DefaultTableModel) tipoSalasTable.getModel();
+        for (int i = 0; i < Math.min(10, sorted.size()); i++) {
+            model.addRow(new Object[]{sorted.get(i).getKey(), sorted.get(i).getValue()});
+        }
     }
 }
