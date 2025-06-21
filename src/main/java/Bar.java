@@ -42,11 +42,11 @@ public class Bar extends JFrame {
     private JButton[][] productButtons = new JButton[4][4];
     private int currentPage = 0;
     private final int ITEMS_PER_PAGE = 16;
-    private Cart cart = new Cart();
+    private Cart cart;
 
     public Bar(String title) throws HeadlessException {
         super(title);
-        this.cart = cart;
+        this.cart = new  Cart();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
@@ -253,10 +253,7 @@ public class Bar extends JFrame {
     }
 
 
-
-
     public static void main(String[] args) {
-        Cart cart = new Cart();
-        SwingUtilities.invokeLater(() -> new Bar("Bar", cart).setVisible(true));
+        SwingUtilities.invokeLater(() -> new Bar("Bar").setVisible(true));
     }
 }

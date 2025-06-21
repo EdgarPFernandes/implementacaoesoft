@@ -38,10 +38,10 @@ public class AppData {
     }
 
     private void loadDefaultBarProducts() {
-            barProducts.add(new BarProduct("Coca-cola", 2.5, 10,1,0.6));
-            barProducts.add(new BarProduct("Pepsi", 2.3, 15,2,0.3));
-            barProducts.add(new BarProduct("Fanta", 2.4, 12,1,1.2));
-            barProducts.add(new BarProduct("Sprite", 2.2, 15,3, 1));
+        barProducts.add(new BarProduct("Coca-cola", 2.5, 10,1,0.6));
+        barProducts.add(new BarProduct("Pepsi", 2.3, 15,2,0.3));
+        barProducts.add(new BarProduct("Fanta", 2.4, 12,1,1.2));
+        barProducts.add(new BarProduct("Sprite", 2.2, 15,3, 1));
     }
 
     private void loadDefaultMovies() {
@@ -50,7 +50,8 @@ public class AppData {
     }
 
     private void loadDefaultSessions() {
-
+        sessions.add(new Session(movies.get(0),"A1","17:00","21/06/2025"));
+        sessions.add(new Session(movies.get(1),"A1","19:00","21/06/2025"));
     }
 
     private void loadDefaultSalas() {}
