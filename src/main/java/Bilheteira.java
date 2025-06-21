@@ -37,6 +37,12 @@ public class Bilheteira extends JFrame {
     private JButton cancelButton;
     private JButton confirmButton;
     private JComboBox movieFilter;
+    private JButton btnFilmes;
+    private JButton btnSessoes;
+    private JButton btnBar;
+    private JButton btnBilheteira;
+    private JButton btnConsulta;
+    private JButton btnSalas;
 
     private Cart cart;
     private JButton[][] movieButtons = new JButton[4][4];
@@ -100,6 +106,36 @@ public class Bilheteira extends JFrame {
             dispose(); // closes Bar window
         });
 
+        btnBar.addActionListener(e -> {
+            new Bar("Bar").setVisible(true);
+            dispose();
+        });
+
+        btnBilheteira.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose();
+        });
+
+        btnFilmes.addActionListener(e -> {
+            new Filmes("Filmes").setVisible(true);
+            dispose();
+        });
+
+        btnSessoes.addActionListener(e -> {
+            new Sessoes("Sessoes").setVisible(true);
+            dispose();
+        });
+
+        btnConsulta.addActionListener(e -> {
+            new Consulta("Consulta").setVisible(true);
+            dispose();
+        });
+
+        btnSalas.addActionListener(e -> {
+            new Salas("Salas").setVisible(true);
+            dispose();
+        });
+
         setupButtons();
         updateMovieButtons();
     }
@@ -155,6 +191,36 @@ public class Bilheteira extends JFrame {
         barButton.addActionListener(e -> {
             new Bar("Bar",cart).setVisible(true);
             dispose(); // closes Bar window
+        });
+
+        btnBar.addActionListener(e -> {
+            new Bar("Bar").setVisible(true);
+            dispose();
+        });
+
+        btnBilheteira.addActionListener(e -> {
+            new Bilheteira("Bilheteira").setVisible(true);
+            dispose();
+        });
+
+        btnFilmes.addActionListener(e -> {
+            new Filmes("Filmes").setVisible(true);
+            dispose();
+        });
+
+        btnSessoes.addActionListener(e -> {
+            new Sessoes("Sessoes").setVisible(true);
+            dispose();
+        });
+
+        btnConsulta.addActionListener(e -> {
+            new Consulta("Consulta").setVisible(true);
+            dispose();
+        });
+
+        btnSalas.addActionListener(e -> {
+            new Salas("Salas").setVisible(true);
+            dispose();
         });
 
         setupButtons();
@@ -399,7 +465,6 @@ public class Bilheteira extends JFrame {
 
     private void createTickets(List<Seat> seats, Session session, String ticketType, double price) {
         for (Seat seat : seats) {
-            // Reserve the seat
             session.reserveSeat(seat);
 
             Ticket ticket = new Ticket(
@@ -410,7 +475,8 @@ public class Bilheteira extends JFrame {
                             session.getHora()),
                     price,
                     seat,
-                    session
+                    session,
+                    ticketType // Add the ticket type here
             );
             cart.addProduct(ticket);
         }
@@ -440,11 +506,22 @@ public class Bilheteira extends JFrame {
             Product p = entry.getKey();
             int quantity = entry.getValue();
 
-            // For tickets, show each one individually
-            for (int i = 0; i < quantity; i++) {
-                double price = p.getPrice();
-                model.addElement(p.getProductName() + " - €" + String.format("%.2f", price));
-                total += price;
+            if (p instanceof Ticket) {
+                // For tickets, show type and details
+                Ticket ticket = (Ticket)p;
+                for (int i = 0; i < quantity; i++) {
+                    model.addElement(String.format("%s - %s (Seat: %s, Sala: %s)",
+                            ticket.getTicketType(),
+                            "€" + String.format("%.2f", ticket.getPrice()),
+                            ticket.getSeat().getSeatCode(),
+                            ticket.getSession().getSala()));
+                    total += ticket.getPrice();
+                }
+            } else {
+                // For other products (from Bar)
+                double subtotal = p.getPrice() * quantity;
+                model.addElement(quantity + "x " + p.getProductName() + " - €" + String.format("%.2f", subtotal));
+                total += subtotal;
             }
         }
 

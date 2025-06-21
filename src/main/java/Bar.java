@@ -38,6 +38,12 @@ public class Bar extends JFrame {
     private JTextField totalValue;
     private JButton cancelButton;
     private JButton confirmButton;
+    private JButton btnFilmes;
+    private JButton btnSessoes;
+    private JButton btnBar;
+    private JButton btnBilheteira;
+    private JButton btnConsulta;
+    private JButton btnSalas;
 
     private JButton[][] productButtons = new JButton[4][4];
     private int currentPage = 0;
