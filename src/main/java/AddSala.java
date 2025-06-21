@@ -24,11 +24,6 @@ public class AddSala extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
 
-        // Criar campos
-
-
-        // Criar botões
-
         // Criar e configurar painéis
         JPanel textPanel = new JPanel(new GridLayout(6, 2, 5, 5));
         textPanel.add(new JLabel("Nome:"));

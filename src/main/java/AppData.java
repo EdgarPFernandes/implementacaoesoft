@@ -14,11 +14,15 @@ public class AppData {
     private List<Session> sessions = new ArrayList<>();
     private final String FILE_NAME_SESSIONS = "sessions.dat";
 
+    private List<Sala> salas  = new ArrayList<>();
+    private final String FILE_NAME_SALAS = "salas.dat";
+
     private AppData() {
         // Tenta carregar de ficheiros
         loadDataProducts();
         loadDataMovies();
         loadDataSessions();
+        loadDataSalas();
 
         // Se listas estiverem vazias, cria dados de exemplo
         if (barProducts.isEmpty()) loadDefaultBarProducts();
@@ -49,6 +53,8 @@ public class AppData {
 
     }
 
+    private void loadDefaultSalas() {}
+
     // ------------------------- SAVE METHODS -------------------------
 
     public void saveDataProducts() {
@@ -62,6 +68,8 @@ public class AppData {
     public void saveDataSessions() {
         saveToFile(FILE_NAME_SESSIONS, sessions);
     }
+
+    public void saveDataSalas() {saveToFile(FILE_NAME_SALAS, salas);}
 
     private void saveToFile(String filename, Object data) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -87,6 +95,9 @@ public class AppData {
     private void loadDataSessions() {
         sessions = (List<Session>) loadFromFile(FILE_NAME_SESSIONS);
     }
+
+    @SuppressWarnings("unchecked")
+    private void loadDataSalas() {salas = (List<Sala>) loadFromFile(FILE_NAME_SALAS);}
 
     private Object loadFromFile(String filename) {
         File file = new File(filename);
@@ -117,4 +128,6 @@ public class AppData {
     public List<Session> getSessions() {
         return sessions;
     }
+
+    public List<Sala> getSalas() {return salas;}
 }
