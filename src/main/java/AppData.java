@@ -55,7 +55,9 @@ public class AppData {
         sessions.add(new Session(movies.get(1),"A1","19:00","21/06/2025"));
     }
 
-    private void loadDefaultSalas() {}
+    private void loadDefaultSalas() {
+        salas.add(new Sala("A1", 5, 8, "Dolby", "Normal", "Standard", "Nenhuma"));
+    }
 
     // ------------------------- SAVE METHODS -------------------------
 

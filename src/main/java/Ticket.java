@@ -15,4 +15,14 @@ public class Ticket extends Product{
     public Seat getSeat() {
         return seat;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s (Seat: %s, Sala: %s, Time: %s)",
+                getProductName(),
+                getPrice() + "€",
+                seat.getSeatCode(),
+                session.getSala(),
+                session.getHora());
+    }
 }

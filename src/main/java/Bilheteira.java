@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Bilheteira extends JFrame {
     private JPanel Header;
@@ -63,6 +65,29 @@ public class Bilheteira extends JFrame {
                 System.out.println("- " + s.getMovie() + " at " + s.getHora())
         );
 
+        cancelButton.addActionListener(e -> {
+            cart.clear();
+            updateCartDisplay();
+        });
+
+        confirmButton.addActionListener(e -> {
+            if (cart.getItems().isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Cart is empty",
+                        "No Items",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                // Here you would typically process payment
+                double total = cart.getTotal();
+                JOptionPane.showMessageDialog(this,
+                        String.format("Total: %.2f€\nPayment processed!", total),
+                        "Purchase Complete",
+                        JOptionPane.INFORMATION_MESSAGE);
+                cart.clear();
+                updateCartDisplay();
+            }
+        });
+
         setupButtons();
         updateMovieButtons();
     }
@@ -106,6 +131,9 @@ public class Bilheteira extends JFrame {
 
             // In the button action listener:
             flatButtons[i].addActionListener(e -> {
+                if (currentSessions == null || currentSessions.isEmpty()) {
+                    selectedMovie = null;
+                }
                 if (selectedMovie == null) {
                     // Movie selected
                     int movieIndex = currentPage * ITEMS_PER_PAGE + index;
@@ -121,7 +149,7 @@ public class Bilheteira extends JFrame {
                         );
 
                         // Filter sessions
-                        currentSessions = AppData.getInstance().getSessions().stream()
+                        currentSessions = new ArrayList<>(AppData.getInstance().getSessions().stream()
                                 .filter(s -> {
                                     boolean match = s.getMovie() != null &&
                                             s.getMovie().equals(selectedMovie.getTitle());
@@ -129,7 +157,7 @@ public class Bilheteira extends JFrame {
                                             selectedMovie.getTitle() + "': " + match);
                                     return match;
                                 })
-                                .toList();
+                                .toList());
 
                         System.out.println("Found " + currentSessions.size() + " matching sessions");
 
@@ -145,14 +173,7 @@ public class Bilheteira extends JFrame {
                     int sessionIndex = currentPage * ITEMS_PER_PAGE + index;
                     if (sessionIndex < currentSessions.size()) {
                         Session session = currentSessions.get(sessionIndex);
-                        JOptionPane.showMessageDialog(this,
-                                "Sessão escolhida:\n" +
-                                        "Sala: " + session.getSala() + "\n" +
-                                        "Hora: " + session.getHora());
-
-                        selectedMovie = null;
-                        currentPage = 0;
-                        updateMovieButtons();
+                        showTicketTypeDialog(session); // This launches the new 3-option dialog
                     }
                 }
             });
@@ -209,8 +230,160 @@ public class Bilheteira extends JFrame {
     }
 
 
+    private void showTicketTypeDialog(Session selectedSession) {
+        JDialog dialog = new JDialog(this, "Select Ticket Type", true);
+        dialog.setLayout(new GridLayout(3, 1, 10, 10));
+        dialog.setSize(300, 200);
+        dialog.setLocationRelativeTo(this);
+
+        JButton childBtn = new JButton("Criança: 5€");
+        JButton adultBtn = new JButton("Adulto: 7€");
+        JButton studentBtn = new JButton("Estudante: 6€");
+
+        childBtn.addActionListener(e -> {
+            dialog.dispose();
+            showSeatSelection(selectedSession, "Criança", 5.0);
+        });
+
+        adultBtn.addActionListener(e -> {
+            dialog.dispose();
+            showSeatSelection(selectedSession, "Adulto", 7.0);
+        });
+
+        studentBtn.addActionListener(e -> {
+            dialog.dispose();
+            showSeatSelection(selectedSession, "Estudante", 6.0);
+        });
+
+        dialog.add(childBtn);
+        dialog.add(adultBtn);
+        dialog.add(studentBtn);
+        dialog.setVisible(true);
+    }
+
+    private void showSeatSelection(Session session, String ticketType, double price) {
+        Sala sala = findSalaByNumber(session.getSala());
+
+        // Add validation for room dimensions
+        int rows = Math.min(sala.getComprimento(), 8); // Limit to 8 rows max
+        int cols = Math.min(sala.getLargura(), 10);    // Limit to 10 columns max
+
+        JDialog dialog = new JDialog(this, "Select Seats - " + sala.getNome(), true);
+        dialog.setLayout(new BorderLayout());
+
+        // Screen representation
+        JPanel screenPanel = new JPanel();
+        screenPanel.add(new JLabel("TELA", JLabel.CENTER));
+        screenPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
+        dialog.add(screenPanel, BorderLayout.NORTH);
+
+        // Seat grid with scroll pane
+        JPanel seatPanel = new JPanel(new GridLayout(0, cols, 5, 5)); // 0 means variable rows
+        JScrollPane scrollPane = new JScrollPane(seatPanel);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+
+        List<Seat> selectedSeats = new ArrayList<>();
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                char rowChar = (char) ('A' + row);
+                int seatNum = col + 1;
+                JButton seatBtn = new JButton(rowChar + "" + seatNum);
+
+                // Style the button
+                seatBtn.setBackground(Color.GREEN);
+                seatBtn.setOpaque(true);
+                seatBtn.setBorderPainted(false);
+
+                seatBtn.addActionListener(e -> {
+                    if (seatBtn.getBackground() == Color.GREEN) {
+                        seatBtn.setBackground(Color.YELLOW);
+                        selectedSeats.add(new Seat(rowChar, seatNum));
+                    } else {
+                        seatBtn.setBackground(Color.GREEN);
+                        selectedSeats.removeIf(s -> s.getRow() == rowChar && s.getNumber() == seatNum);
+                    }
+                });
+
+                seatPanel.add(seatBtn);
+            }
+        }
+
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        // Control panel
+        JPanel controlPanel = new JPanel();
+        JButton confirmBtn = new JButton("Confirmar");
+        confirmBtn.addActionListener(e -> {
+            if (!selectedSeats.isEmpty()) {
+                createTickets(selectedSeats, session, ticketType, price);
+                dialog.dispose();
+            } else {
+                JOptionPane.showMessageDialog(dialog,
+                        "Selecione pelo menos um lugar",
+                        "Nenhum lugar selecionado",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
+        controlPanel.add(confirmBtn);
+        dialog.add(controlPanel, BorderLayout.SOUTH);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
+    private Sala findSalaByNumber(String salaNumber) {
+        return AppData.getInstance().getSalas().stream()
+                .filter(s -> s.getNome().equals(salaNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Sala not found: " + salaNumber));
+    }
+
+    private void createTickets(List<Seat> seats, Session session, String ticketType, double price) {
+        for (Seat seat : seats) {
+            Ticket ticket = new Ticket(
+                    String.format("%s (%s - %s %s)",
+                            ticketType,
+                            seat.getSeatCode(),
+                            session.getSala(),
+                            session.getHora()),
+                    price,
+                    seat,
+                    session
+            );
+            cart.addProduct(ticket);
+        }
+
+        // Reset state
+        selectedMovie = null;
+        currentSessions = new ArrayList<>();
+        currentPage = 0;
+
+        // Update UI
+        updateMovieButtons();
+        updateCartDisplay();
+
+        JOptionPane.showMessageDialog(this,
+                String.format("%d %s tickets added to cart", seats.size(), ticketType),
+                "Tickets Added",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 
 
+    private void updateCartDisplay() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) {
+            Product product = entry.getKey();
+            model.addElement(String.format("%s x%d - %.2f€",
+                    product.getProductName(),
+                    entry.getValue(),
+                    product.getPrice() * entry.getValue()));
+        }
+        list1.setModel(model);
+        totalValue.setText(String.format("%.2f€", cart.getTotal()));
+    }
 
 
     public static void main(String[] args) {
