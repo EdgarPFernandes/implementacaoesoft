@@ -317,7 +317,7 @@ public class Bar extends JFrame {
     }
 
 
-    public static void main(String[] args) {
+    public static void main( ) {
         SwingUtilities.invokeLater(() -> new Bar("Bar").setVisible(true));
     }
 }
