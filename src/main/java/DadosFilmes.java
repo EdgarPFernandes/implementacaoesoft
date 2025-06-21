@@ -1,7 +1,8 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class Consulta extends JFrame {
+public class DadosFilmes extends JFrame {
     private JPanel mainPanel;
     private JPanel navbarPanel;
     private JButton btnFilmes;
@@ -23,16 +24,18 @@ public class Consulta extends JFrame {
     private JTextField lucroMedioFilme;
     private JTextField retabilidadeSala;
     private JTextField taxeMediaSala;
+    private JTable dadosFilmesTable;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Consulta("Consulta").setVisible(true));
-    }
 
-    public Consulta(String title) throws HeadlessException {
+    public DadosFilmes(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         pack();
+
+        dadosFilmesTable.setModel(new DefaultTableModel(
+                new Object[]{"Nome Filme", "Licenciamento","Lucro Gerado"}, 10
+        ));
 
         btnBar.addActionListener(e -> {
             new Bar("Bar").setVisible(true);
@@ -78,7 +81,7 @@ public class Consulta extends JFrame {
 
         btnTipoSala.addActionListener(e -> {
             // Implement the action for Tipo Sala button
-            new TipoBilhetes("Tipo Sala").setVisible(true);
+            new TipoSalas("Tipo Salas").setVisible(true);
             dispose();
         });
 
